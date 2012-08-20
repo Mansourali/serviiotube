@@ -45,6 +45,18 @@ chrome.extension.onMessage.addListener(
           });
           return true;
       }
+
+      ///
+      /// refreshOnlineResource
+      ///
+      if (request.type == "refreshOnlineResource") {
+          console.log("Request to refresh " + request.id);
+          serviioApi.refreshOnlineResource(request.id, function (r) {
+              sendResponse({ isValidResponse: serviioApi.isValidResponse(r), done: r });
+          });
+          return true;
+      }
+       
   });
 
 ///
@@ -72,21 +84,21 @@ chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
             // Any results pages
             if (uri.indexOf("http://www.youtube.com/results") == 0) {
                 chrome.pageAction.setTitle({ title: "Click to add search to serviio", tabId: tabId });
-                chrome.pageAction.setIcon({ path: "icon.png", tabId: tabId });
+                chrome.pageAction.setIcon({ path: "images/icon.add.png", tabId: tabId });
                 chrome.pageAction.show(tabId);
                 clickObj = { type: "results", name: tab.title, url: uri, tabId: tabId };
             }
             // Any user pages
             else if (uri.indexOf("http://www.youtube.com/user/") == 0) {
                 chrome.pageAction.setTitle({ title: "Click to add user feed to serviio", tabId: tabId });
-                chrome.pageAction.setIcon({ path: "icon.png", tabId: tabId });
+                chrome.pageAction.setIcon({ path: "images/icon.add.png", tabId: tabId });
                 chrome.pageAction.show(tabId);
                 clickObj = { type: "user", name: tab.title, url: uri, tabId: tabId };
             }
             // Any pages playlist pages 
             else if (uri.indexOf("http://www.youtube.com/playlist") == 0) {
                 chrome.pageAction.setTitle({ title: "Click to add playlist to serviio", tabId: tabId });
-                chrome.pageAction.setIcon({ path: "icon.png", tabId: tabId });
+                chrome.pageAction.setIcon({ path: "images/icon.add.png", tabId: tabId });
                 chrome.pageAction.show(tabId);
                 clickObj = { type: "playlist", name: tab.title, url: uri, tabId: tabId };
             }

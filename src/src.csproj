@@ -54,8 +54,12 @@
     <Folder Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="images\icon.remove.png" />
+    <Content Include="images\icon.refresh.png" />
+    <Content Include="images\icon.add.png" />
+    <Content Include="images\icon-large.png" />
     <Content Include="css\popup.css" />
-    <Content Include="icon.png" />
+    <Content Include="images\icon.png" />
     <Content Include="scripts\background.js" />
     <Content Include="scripts\contentscript.js" />
     <Content Include="scripts\thirdparty\jquery.min.js" />

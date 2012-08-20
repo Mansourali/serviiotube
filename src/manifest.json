@@ -6,9 +6,15 @@
   
   
   "page_action": {
-    "default_icon": "icon.png", // optional
+    "default_icon": "images/icon.png", // optional
     "default_title": "ServiioTube"    // optional; shown in tooltip
   },
+  "web_accessible_resources": [
+    "images/icon.png",
+	"images/icon.add.png",
+	"images/icon.remove.png",
+	"images/icon.refresh.png"
+  ],
 
   "content_scripts": [
     {
@@ -17,7 +23,7 @@
     }
   ],
   "permissions": [
-    "http://www.youtube.com/*",	"http://*/" , "tabs"
+    "http://www.youtube.com/*",	"http://*/" , "tabs" 
   ],
   "background": {
     "scripts": [ "scripts/thirdparty/json2.js", "scripts/thirdparty/jquery.min.js","scripts/serviioApi.js", "scripts/thirdparty/fancy-settings/lib/store.js", "scripts/background.js"]

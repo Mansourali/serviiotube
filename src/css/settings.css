@@ -2,3 +2,5 @@
 // Add your own style rules here, not in css/main.css
 // or css/setting.css for easy updating reasons.
 */
+table.setting p.img {width:410px;margin:10px 10px 10px 00px;border:1px solid #CCCCCC;border-radius: 5px;}
+table.setting img {width:400px;margin:5px}

@@ -32,10 +32,11 @@ ServiioApi.prototype.setRepository = function (repo, result) {
     this.request("PUT", "/rest/repository", JSON.stringify(repo), result);
 };
 
-ServiioApi.prototype.forceLibraryRefresh = function (id, result) {
-    //<?xml version="1.0" encoding="UTF-8" ?>
+ServiioApi.prototype.refreshOnlineResource = function (id, result) {
     var action = '<?xml version="1.0" encoding="UTF-8" ?>' + "\n" + '<action><name>forceOnlineResourceRefresh</name><parameter>' + id + '</parameter></action>';
-    this.request("POST", "/rest/action", action, result);
+    //var action =  JSON.stringify({ action : { name: "forceOnlineResourceRefresh", parameter: id }});
+
+    this.request("POST", "/rest/action", action, function (r) { console.log(r); result(r); });
 };
 
 ServiioApi.prototype.isValidResponse = function (response) {
@@ -135,7 +136,8 @@ ServiioApi.prototype.request = function (type, path, body, result) {
     if (settings.isValid) {
         var fullUri = settings.url + path;
         console.log("Loading " + type + ": " + fullUri);
-
+        var contentType = "application/json; charset=UTF-8";
+        if (body != null && body.indexOf("<?xml") == 0) contentType = "application/xml; charset=UTF-8";
         $.ajax({
             type: type,
             url: fullUri,
@@ -148,7 +150,7 @@ ServiioApi.prototype.request = function (type, path, body, result) {
                 result({ errorCode: 1, errorMessage: "Error while connecting to " + fullUri });
             },
             dataType: "json",
-            headers: { Accept: "application/json", "Content-Type": "application/json; charset=UTF-8" },
+            headers: { Accept: "application/json", "Content-Type": contentType },
             scriptCharset: "utf-8"
             //contentType: "application/xml, text/xml"
         });
