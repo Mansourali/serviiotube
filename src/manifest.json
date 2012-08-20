@@ -1,0 +1,26 @@
+{
+  "name": "ServiioTube",
+  "version": "0.1",
+  "manifest_version": 2,
+  "description": "Manage video subscriptions for you tube on serviio",
+  
+  
+  "page_action": {
+    "default_icon": "icon.png", // optional
+    "default_title": "ServiioTube"    // optional; shown in tooltip
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["http://www.youtube.com/view_all_playlists"],
+      "js": ["js/jquery.min.js","js/contentscript.js"]
+    }
+  ],
+  "permissions": [
+    "http://www.youtube.com/*",	"http://*/" , "tabs"
+  ],
+  "background": {
+    "scripts": [ "js/json2.js", "js/jquery.min.js","settings/js/serviioApi.js", "settings/lib/store.js", "js/background.js"]
+  },
+  "options_page": "settings\\index.html"
+}
