@@ -1,60 +1,20 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Extension", "Extension", "{D1C3748F-EC00-44EA-84D8-FF1B74DE8502}"
-	ProjectSection(SolutionItems) = preProject
-		Extension\icon.png = Extension\icon.png
-		Extension\manifest.json = Extension\manifest.json
-		Extension\css\popup.css = Extension\css\popup.css
-		Extension\popup.html = Extension\popup.html
-		Extension\service.html = Extension\service.html
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "css", "css", "{C0C10913-9779-431C-9050-37C348EA3625}"
-	ProjectSection(SolutionItems) = preProject
-		Extension\css\popup.css = Extension\css\popup.css
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "js", "js", "{5E9DBB11-1B54-4C3D-9345-76AC2D2FA148}"
-	ProjectSection(SolutionItems) = preProject
-		Extension\js\background.js = Extension\js\background.js
-		Extension\js\contentscript.js = Extension\js\contentscript.js
-		Extension\js\popup.js = Extension\js\popup.js
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "thirdparty", "thirdparty", "{E6BA13B1-ED6C-472E-BE4C-ECD1398DBCD5}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "settings", "settings", "{344184CA-6FD3-4745-9358-54F072585855}"
-	ProjectSection(SolutionItems) = preProject
-		Extension\settings\index.html = Extension\settings\index.html
-		Extension\settings\manifest.js = Extension\settings\manifest.js
-		Extension\settings\settings.js = Extension\settings\settings.js
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "js", "js", "{5C556D15-BD03-45C6-BD66-DDA6869C6A5F}"
-	ProjectSection(SolutionItems) = preProject
-		Extension\settings\js\i18n.js = Extension\settings\js\i18n.js
-		Extension\settings\js\serviioApi.js = Extension\settings\js\serviioApi.js
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "classes", "classes", "{51F05C65-8C27-4229-AAF8-4AB63D0923BC}"
-	ProjectSection(SolutionItems) = preProject
-		Extension\settings\js\classes\fancy-settings.js = Extension\settings\js\classes\fancy-settings.js
-		Extension\settings\js\classes\search.js = Extension\settings\js\classes\search.js
-		Extension\settings\js\classes\setting.js = Extension\settings\js\classes\setting.js
-		Extension\settings\js\classes\tab.js = Extension\settings\js\classes\tab.js
-	EndProjectSection
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "src", "src\src.csproj", "{7D40B6E7-6501-4B3C-89F4-9FD4625E490B}"
 EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7D40B6E7-6501-4B3C-89F4-9FD4625E490B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D40B6E7-6501-4B3C-89F4-9FD4625E490B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D40B6E7-6501-4B3C-89F4-9FD4625E490B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D40B6E7-6501-4B3C-89F4-9FD4625E490B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{C0C10913-9779-431C-9050-37C348EA3625} = {D1C3748F-EC00-44EA-84D8-FF1B74DE8502}
-		{5E9DBB11-1B54-4C3D-9345-76AC2D2FA148} = {D1C3748F-EC00-44EA-84D8-FF1B74DE8502}
-		{344184CA-6FD3-4745-9358-54F072585855} = {D1C3748F-EC00-44EA-84D8-FF1B74DE8502}
-		{E6BA13B1-ED6C-472E-BE4C-ECD1398DBCD5} = {5E9DBB11-1B54-4C3D-9345-76AC2D2FA148}
-		{5C556D15-BD03-45C6-BD66-DDA6869C6A5F} = {344184CA-6FD3-4745-9358-54F072585855}
-		{51F05C65-8C27-4229-AAF8-4AB63D0923BC} = {5C556D15-BD03-45C6-BD66-DDA6869C6A5F}
 	EndGlobalSection
 EndGlobal
