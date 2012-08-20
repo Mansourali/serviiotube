@@ -61,7 +61,6 @@
     <Content Include="js\background.js" />
     <Content Include="js\contentscript.js" />
     <Content Include="js\jquery.min.js" />
-    <Content Include="js\json.js" />
     <Content Include="js\json2.js" />
     <Content Include="js\manifest.js" />
     <Content Include="js\popup.js" />

@@ -13,6 +13,7 @@ $('.vm-video-item-content').each(function (index) {
     console.log(playlistId);
     var currentButtonCollection = $(this).find('.vm-pl-edit');
     getOnlineResource(getPlaylistUrl(playlistId), function (response) {
+        if (!response.IsValidRequest) return "";
         var text = "Add";
         var id = ""
         if (response.found) {

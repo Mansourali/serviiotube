@@ -1,9 +1,8 @@
-//usage
-/*
+/* usage
 var serviioApi = new ServiioApi(new Store("settings"));
 console.log(serviioApi.getSettings());
-
 */
+
 //define
 function ServiioApi(settings) {
     this.settings = settings;
@@ -11,35 +10,45 @@ function ServiioApi(settings) {
 
 //methods
 ServiioApi.prototype.getSettings = function () {
-    return {
+    var settings = {
         'host': this.settings.get("host"),
-        'port': this.settings.get("port"),
-        'url': "http://" + this.settings.get("host") + ":" + this.settings.get("port")  ,
-        'urlPing': "http://" + this.settings.get("host") + ":" + this.settings.get("port") + "/rest/ping"
+        'port': this.settings.get("port")
     };
+    settings.url = "http://" + settings.host + ":" + settings.port;
+    settings.urlPing = settings.url + "/rest/ping";
+    settings.IsValid = settings.host != null && settings.port != null;
+    return settings;
 };
 
 ServiioApi.prototype.ping = function (result) {
-    this.request("GET","/rest/ping",null, result);
+    this.request("GET", "/rest/ping", null, result);
 };
 
 ServiioApi.prototype.getRepository = function (result) {
-    this.request("GET","/rest/repository", null, result);
+    this.request("GET", "/rest/repository", null, result);
 };
 
-ServiioApi.prototype.setRepository = function (repo,result) {
+ServiioApi.prototype.setRepository = function (repo, result) {
     this.request("PUT", "/rest/repository", JSON.stringify(repo), result);
 };
 
 ServiioApi.prototype.forceLibraryRefresh = function (id, result) {
     //<?xml version="1.0" encoding="UTF-8" ?>
-    var action = '<?xml version="1.0" encoding="UTF-8" ?>'+"\n"+'<action><name>forceOnlineResourceRefresh</name><parameter>'+id+'</parameter></action>';
+    var action = '<?xml version="1.0" encoding="UTF-8" ?>' + "\n" + '<action><name>forceOnlineResourceRefresh</name><parameter>' + id + '</parameter></action>';
     this.request("POST", "/rest/action", action, result);
 };
 
+ServiioApi.prototype.isValidResponse = function(r) {
+    return r == null || r.errorCode == null || r.errorCode == 0;
+}
 
 ServiioApi.prototype.getOnlineResource = function (uri, result) {
+    var obj = this;
     this.getRepository(function (r) {
+        if (!obj.isValidResponse(r)) {
+            result(result);
+            return;
+        }
         var found = null;
         for (var i = 0; i < r.onlineRepositories.length; i++) {
             repo = r.onlineRepositories[i];
@@ -54,7 +63,7 @@ ServiioApi.prototype.getOnlineResource = function (uri, result) {
 };
 
 ServiioApi.prototype.addOnlineResource = function (name, uri, result) {
-    
+
     var thisPointer = this;
     this.getRepository(function (r) {
 
@@ -86,13 +95,13 @@ ServiioApi.prototype.addOnlineResource = function (name, uri, result) {
             thisPointer.setRepository(r, function (resSet) {
                 result(true);
             });
-            
+
         }
     });
 };
 
 ServiioApi.prototype.removeOnlineResource = function (id, result) {
-    
+
     var thisPointer = this;
     this.getRepository(function (r) {
 
@@ -120,27 +129,31 @@ ServiioApi.prototype.removeOnlineResource = function (id, result) {
 };
 
 
-
-
 ServiioApi.prototype.request = function (type, path, body, result) {
-    var fullUri = this.getSettings().url + path;
-    console.log(type + ": " + fullUri);
-    
-    $.ajax({
-        type: type,
-        url: fullUri,
-        data: body,
-        success: function (data) {
-            result(data);
-        },
-        error: function (e) {
-            console.log("fatal call");
-            result({ errorCode: 1, errorMessage: e });
-        },
-        dataType: "json",
-        headers: { Accept: "application/json", "Content-Type": "application/json; charset=UTF-8" },
-        scriptCharset: "utf-8"
-        //contentType: "application/xml, text/xml"
-    });
+    var settings = this.getSettings();
+    if (settings.isValid) {
+        var fullUri = settings.url + path;
+        console.log("Loading " + type + ": " + fullUri);
+
+        $.ajax({
+            type: type,
+            url: fullUri,
+            data: body,
+            success: function (data) {
+                result(data);
+            },
+            error: function (e) {
+                console.log("Fatal call");
+                result({ errorCode: 1, errorMessage: "Error while connecting to " + fullUri });
+            },
+            dataType: "json",
+            headers: { Accept: "application/json", "Content-Type": "application/json; charset=UTF-8" },
+            scriptCharset: "utf-8"
+            //contentType: "application/xml, text/xml"
+        });
+    }
+    else {
+        result({ errorCode: 1, errorMessage: "Invalid settings" });
+    }
 
 };
