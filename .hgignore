@@ -4,3 +4,6 @@ sabconnect*
 *.suo
 *.user
 obj/
+build/dist
+build/release
+*.pem
