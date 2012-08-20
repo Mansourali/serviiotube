@@ -51,6 +51,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="js\thirdparty\" />
     <Folder Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
@@ -68,7 +69,6 @@
     <Content Include="options.html" />
     <Content Include="popup.html" />
     <Content Include="service.html" />
-    <Content Include="settings\1manifest.js" />
     <Content Include="settings\css\main.css" />
     <Content Include="settings\css\setting.css" />
     <Content Include="settings\custom.css" />

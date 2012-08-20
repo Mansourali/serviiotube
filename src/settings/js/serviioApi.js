@@ -16,7 +16,7 @@ ServiioApi.prototype.getSettings = function () {
     };
     settings.url = "http://" + settings.host + ":" + settings.port;
     settings.urlPing = settings.url + "/rest/ping";
-    settings.IsValid = settings.host != null && settings.port != null;
+    settings.isValid = settings.host != null && settings.port != null;
     return settings;
 };
 
@@ -38,8 +38,9 @@ ServiioApi.prototype.forceLibraryRefresh = function (id, result) {
     this.request("POST", "/rest/action", action, result);
 };
 
-ServiioApi.prototype.isValidResponse = function(r) {
-    return r == null || r.errorCode == null || r.errorCode == 0;
+ServiioApi.prototype.isValidResponse = function (response) {
+    var isValid = response == null || response.errorCode == null || response.errorCode == 0;
+    return isValid;
 }
 
 ServiioApi.prototype.getOnlineResource = function (uri, result) {

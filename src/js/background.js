@@ -20,7 +20,7 @@ chrome.extension.onMessage.addListener(
           console.log("Request playlist info for " + request.url);
           //sendResponse({ hasYoutubePlayList: false });
           serviioApi.getOnlineResource(request.url, function (r) {
-              sendResponse({ isValidRequest : serviioApi.isValidRequest(r), found: r != null, onlineRep: r });
+              sendResponse({ isValidResponse : serviioApi.isValidResponse(r), found: r != null, onlineRep: r });
           });
           return true;
       }
@@ -30,7 +30,7 @@ chrome.extension.onMessage.addListener(
       if (request.type == "addOnlineResource") {
           console.log("Request to add " + request.name);
           serviioApi.addOnlineResource(request.name, request.url, function (r) {
-              sendResponse({ isValidRequest : serviioApi.isValidRequest(r), done: r });
+              sendResponse({ isValidResponse : serviioApi.isValidResponse(r), done: r });
           });
           return true;
       }
@@ -41,7 +41,7 @@ chrome.extension.onMessage.addListener(
       if (request.type == "removeOnlineResource") {
           console.log("Request to remove " + request.id);
           serviioApi.removeOnlineResource(request.id, function (r) {
-              sendResponse({ isValidRequest: serviioApi.isValidRequest(r), done: r });
+              sendResponse({ isValidResponse: serviioApi.isValidResponse(r), done: r });
           });
           return true;
       }
@@ -101,29 +101,27 @@ function AddNewUrlToService(name, url) {
     console.log("check");
     chrome.pageAction.hide(clickObj.tabId);
     serviioApi.getOnlineResource(url,
-    function (r) {
+    function (response) {
         // exception
-        if (serviioApi.isValidResponse(r)) {
+        if (!serviioApi.isValidResponse(response)) {
             displayOptionToViewSettings();
         }
         else {
-            if (r != null) {
+            if (response != null) {
                 if (confirm("Feed already exists would you like to remove it")) {
-                    serviioApi.removeOnlineResource(r.id, function (removed) {
-                        console.log("removed");
+                    serviioApi.removeOnlineResource(response.id, function (removed) {
+                        console.log("Feed removed");
                     });
                 }
             }
             else {
                 serviioApi.addOnlineResource(name, url, function (added) {
-                    console.log("added");
+                    console.log("Feed added");
                 });
             }
         }
     });
 }
-
-
 
 function displayOptionToViewSettings() {
     if (confirm("Error while connecting to serviio. Would you like to check your settings?")) {

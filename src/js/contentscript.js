@@ -13,12 +13,11 @@ $('.vm-video-item-content').each(function (index) {
     console.log(playlistId);
     var currentButtonCollection = $(this).find('.vm-pl-edit');
     getOnlineResource(getPlaylistUrl(playlistId), function (response) {
-        if (!response.IsValidRequest) return "";
+        if (!response.isValidResponse) return "";
         var text = "Add";
         var id = ""
         if (response.found) {
             text = "Remove";
-
         }
 
         var button = '<button type="button" class="addRemove yt-uix-button yt-uix-button-default" role="button"><span class="yt-uix-button-content">' + text + '</span></button>';
@@ -34,11 +33,8 @@ $('.vm-video-item-content').each(function (index) {
                     currentButton.find("span").text("Add");
                     currentButton.show();
                 });
-
-
             }
             else {
-
                 addOnlineResource(name, getPlaylistUrl(playlistId), function (r) {
                     getOnlineResource(getPlaylistUrl(playlistId), function (getNv) {
                         response = getNv;
