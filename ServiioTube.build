@@ -23,7 +23,7 @@
 
   <!-- Version -->
   <property name="version.minor" value="1"/>
-  <property name="version.build" value="0" />
+  <property name="version.build" value="1" />
   <property name="project.fullversion" value="${version.minor}.${version.build}" dynamic="true" />
  
 
