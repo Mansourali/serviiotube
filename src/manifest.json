@@ -13,14 +13,14 @@
   "content_scripts": [
     {
       "matches": ["http://www.youtube.com/view_all_playlists"],
-      "js": ["js/jquery.min.js","js/contentscript.js"]
+      "js": ["scripts/thirdparty/jquery.min.js","scripts/contentscript.js"]
     }
   ],
   "permissions": [
     "http://www.youtube.com/*",	"http://*/" , "tabs"
   ],
   "background": {
-    "scripts": [ "js/json2.js", "js/jquery.min.js","settings/js/serviioApi.js", "settings/lib/store.js", "js/background.js"]
+    "scripts": [ "scripts/thirdparty/json2.js", "scripts/thirdparty/jquery.min.js","scripts/serviioApi.js", "scripts/thirdparty/fancy-settings/lib/store.js", "scripts/background.js"]
   },
-  "options_page": "settings\\index.html"
+  "options_page": "settings.html"
 }

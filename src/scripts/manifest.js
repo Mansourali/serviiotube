@@ -1,4 +1,4 @@
-// SAMPLE
+// ServiioTube fancy settings manifest
 this.manifest = {
     "name": "ServiioTube Extension",
     "icon": "icon.png",
@@ -45,3 +45,4 @@ this.manifest = {
         
     ]
 };
+

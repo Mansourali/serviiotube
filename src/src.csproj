@@ -51,41 +51,34 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="js\thirdparty\" />
     <Folder Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="css\main.css" />
     <Content Include="css\popup.css" />
-    <Content Include="css\setting.css" />
     <Content Include="icon.png" />
-    <Content Include="js\background.js" />
-    <Content Include="js\contentscript.js" />
-    <Content Include="js\jquery.min.js" />
-    <Content Include="js\json2.js" />
-    <Content Include="js\manifest.js" />
-    <Content Include="js\popup.js" />
-    <Content Include="js\settings.js" />
-    <Content Include="options.html" />
+    <Content Include="scripts\background.js" />
+    <Content Include="scripts\contentscript.js" />
+    <Content Include="scripts\thirdparty\jquery.min.js" />
+    <Content Include="scripts\thirdparty\json2.js" />
+    <Content Include="scripts\popup.js" />
     <Content Include="popup.html" />
     <Content Include="service.html" />
-    <Content Include="settings\css\main.css" />
-    <Content Include="settings\css\setting.css" />
-    <Content Include="settings\custom.css" />
-    <Content Include="settings\i18n.js" />
-    <Content Include="settings\icon.png" />
-    <Content Include="settings\index.html" />
-    <Content Include="settings\js\classes\fancy-settings.js" />
-    <Content Include="settings\js\classes\search.js" />
-    <Content Include="settings\js\classes\setting.js" />
-    <Content Include="settings\js\classes\tab.js" />
-    <Content Include="settings\js\i18n.js" />
-    <Content Include="settings\js\serviioApi.js" />
-    <Content Include="settings\lib\default.css" />
-    <Content Include="settings\lib\mootools-core.js" />
-    <Content Include="settings\lib\store.js" />
-    <Content Include="settings\manifest.js" />
-    <Content Include="settings\settings.js" />
+    <Content Include="scripts\thirdparty\fancy-settings\css\main.css" />
+    <Content Include="scripts\thirdparty\fancy-settings\css\setting.css" />
+    <Content Include="css\settings.css" />
+    <Content Include="scripts\i18n.js" />
+    <Content Include="settings.html" />
+    <Content Include="scripts\thirdparty\fancy-settings\js\classes\fancy-settings.js" />
+    <Content Include="scripts\thirdparty\fancy-settings\js\classes\search.js" />
+    <Content Include="scripts\thirdparty\fancy-settings\js\classes\setting.js" />
+    <Content Include="scripts\thirdparty\fancy-settings\js\classes\tab.js" />
+    <Content Include="scripts\thirdparty\fancy-settings\js\i18n.js" />
+    <Content Include="scripts\serviioApi.js" />
+    <Content Include="scripts\thirdparty\fancy-settings\lib\default.css" />
+    <Content Include="scripts\thirdparty\fancy-settings\lib\mootools-core.js" />
+    <Content Include="scripts\thirdparty\fancy-settings\lib\store.js" />
+    <Content Include="scripts\manifest.js" />
+    <Content Include="scripts\settings.js" />
   </ItemGroup>
   <ItemGroup>
     <None Include="manifest.json" />

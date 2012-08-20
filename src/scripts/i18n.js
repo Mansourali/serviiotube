@@ -1,4 +1,3 @@
-// SAMPLE
 this.i18n = {
     "settings": {
         "en": "Settings",
@@ -69,3 +68,5 @@ this.i18n = {
         "de": "Trennen:"
     }
 };
+
+
