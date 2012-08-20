@@ -1,7 +1,7 @@
 // ServiioTube fancy settings manifest
 this.manifest = {
     "name": "ServiioTube Extension",
-    "icon": "icon-large.png",
+    "icon": "images/icon-large.png",
     "settings": [
         {
             "tab": i18n.get("Serviio"),
@@ -26,7 +26,7 @@ this.manifest = {
             "name": "testconnection",
             "type": "button",
             "label": i18n.get("Connection"),
-            "text": i18n.get("Test")
+            "text": i18n.get("Test connection")
         },
         {
             "tab": i18n.get("Serviio"),
