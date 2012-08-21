@@ -1,6 +1,6 @@
 {
   "name": "ServiioTube",
-  "version": "1.0",
+  "version": "1.1",
   "manifest_version": 2,
   "description": "Manage youtube feed subscriptions on serviio directly from youtube", 
   "page_action": {
