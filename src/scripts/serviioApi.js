@@ -14,8 +14,17 @@ ServiioApi.prototype.getSettings = function () {
         'host': this.settings.get("host"),
         'port': this.settings.get("port")
     };
+    //add some defaults 
+    if (!settings.host) {
+        settings.host = "localhost";
+    }
+    if (!settings.port) {
+        settings.port = "23423";
+    }
+    //add common url
     settings.url = "http://" + settings.host + ":" + settings.port;
     settings.urlPing = settings.url + "/rest/ping";
+    //todo more validation
     settings.isValid = settings.host != null && settings.port != null;
     return settings;
 };

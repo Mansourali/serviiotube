@@ -50,12 +50,20 @@ function showStatus(message,color) {
 }
 
 function getConnectionValues() {
-    
-	return {
-		'host': options.manifest.host.get(),
-		'port': options.manifest.port.get(),
-		'url': "http://"+options.manifest.host.get()+":"+options.manifest.port.get()+"/rest/",
-        'urlPing': "http://"+options.manifest.host.get()+":"+options.manifest.port.get()+"/rest/ping"
-		
-	};
+    var settings = {
+        'host': options.manifest.host.get(),
+        'port': options.manifest.port.get(),
+        
+
+    };
+    //add some defaults 
+    if (!settings.host) {
+        settings.host = "localhost";
+    }
+    if (!settings.port) {
+        settings.port = "23423";
+    }
+    settings.url = "http://" + settings.host + ":" + settings.port;
+    settings.urlPing = settings.url + "/rest/ping";
+    return settings;
 }

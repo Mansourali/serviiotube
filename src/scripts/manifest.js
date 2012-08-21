@@ -9,7 +9,7 @@ this.manifest = {
             "name": "host",
             "type": "text",
             "label": i18n.get("host"),
-            "text": "10.0.0.4"
+            "text": "localhost"
         },
         {
             "tab": i18n.get("Serviio"),
