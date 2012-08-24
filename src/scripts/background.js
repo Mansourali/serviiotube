@@ -77,7 +77,7 @@ chrome.pageAction.onClicked.addListener(function (tab) {
 });
 
 chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
-    if (changeInfo.status == "loading") {
+    if (changeInfo.status == "complete") {
         var uri = tab.url;
         //check for youtube
         if (uri.indexOf("http://www.youtube.com/") == 0) {
@@ -161,8 +161,9 @@ function getParameterByName(name, url) {
     else
         return decodeURIComponent(results[1].replace(/\+/g, " "));
 }
+
 function getUserFromUrl(url) {
-    var regexS = "user/([^/]+)";
+    var regexS = "user/([^/^?^&^#]+)";
     var regex = new RegExp(regexS);
     var results = regex.exec(url);
     if (results == null)
@@ -170,6 +171,7 @@ function getUserFromUrl(url) {
     else
         return results[1]
 }
+
 function getSearchUrl(url) {
     var searchString = escape(getParameterByName("search_query", url));
     var search_type = escape(getParameterByName("search_type", url).trim());

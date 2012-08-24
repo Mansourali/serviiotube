@@ -36,7 +36,6 @@ window.addEvent("domready", function () {
 
         });
     });
-
 });
 
 function showStatus(message,color) {

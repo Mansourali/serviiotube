@@ -23,7 +23,7 @@
 
   <!-- Version -->
   <property name="version.minor" value="1"/>
-  <property name="version.build" value="1" />
+  <property name="version.build" value="2" />
   <property name="project.fullversion" value="${version.minor}.${version.build}" dynamic="true" />
  
 
@@ -61,6 +61,8 @@
         <include name="**\*.css"/>
         <include name="**\*.jpg"/>
         <include name="**\*.js"/>
+        <exclude name="**\screen*.jpg"/>
+        <exclude name="**\examples.settings.jpg"/>        
       </fileset>
     </copy>
   </target>
