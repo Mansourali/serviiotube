@@ -176,6 +176,6 @@ function getSearchUrl(url) {
     var searchString = escape(getParameterByName("search_query", url));
     var search_type = escape(getParameterByName("search_type", url).trim());
     if (search_type.trim().length != 0) search_type = "&category=" + search_type;
-    var newUrl = "http://gdata.youtube.com/feeds/api/videos?q=" + searchString + "&start-index=1&max-results=20&v=2" + search_type;
+    var newUrl = "http://gdata.youtube.com/feeds/api/videos?q=" + searchString + "&v=2" + search_type;
     return newUrl;
 }

@@ -23,7 +23,7 @@
 
   <!-- Version -->
   <property name="version.minor" value="1"/>
-  <property name="version.build" value="2" />
+  <property name="version.build" value="3" />
   <property name="project.fullversion" value="${version.minor}.${version.build}" dynamic="true" />
  
 
@@ -92,7 +92,10 @@
     <echo message="${replaceme}" />
     <property name="new.version.build" value="${int::parse(version.build.read)+1}"/>
     <echo message="${string::replace(build.Data, replaceme, 'name=&quot;version.build&quot; value=&quot;'+new.version.build+'&quot; />')}" file="ServiioTube.build "/>
-
+    <echo message=" "/>
+    <echo message="--------------------------------------------"/>
+    <echo message="Upload to https://chrome.google.com/webstore"/>
+    <echo message="--------------------------------------------"/>
   </target>
 
   <target name="dist">
