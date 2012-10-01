@@ -94,7 +94,7 @@
     <echo message="${string::replace(build.Data, replaceme, 'name=&quot;version.build&quot; value=&quot;'+new.version.build+'&quot; />')}" file="ServiioTube.build "/>
     <echo message=" "/>
     <echo message="--------------------------------------------"/>
-    <echo message="Upload to https://chrome.google.com/webstore"/>
+    <echo message="Upload to https://chrome.google.com/webstore/developer/dashboard"/>
     <echo message="--------------------------------------------"/>
   </target>
 
