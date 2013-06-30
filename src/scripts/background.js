@@ -73,6 +73,9 @@ chrome.pageAction.onClicked.addListener(function (tab) {
     else if (clickObj.type == "playlist") {
         AddNewUrlToService(clickObj.name, getPlaylistUrl(tab.url));
     }
+    else if (clickObj.type == "watch") {
+        AddNewUrlToService(clickObj.name, getPlaylistUrl(tab.url));
+    }
 
 });
 
@@ -102,6 +105,13 @@ chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
                 chrome.pageAction.show(tabId);
                 clickObj = { type: "playlist", name: tab.title, url: uri, tabId: tabId };
             }
+            // Any pages with playlist on watch
+            else if (uri.indexOf("http://www.youtube.com/watch") == 0 && uri.indexOf("list=") > 0) {
+                chrome.pageAction.setTitle({ title: "Click to add playlist to serviio", tabId: tabId });
+                chrome.pageAction.setIcon({ path: "images/icon.add.png", tabId: tabId });
+                chrome.pageAction.show(tabId);
+                clickObj = { type: "watch", name: tab.title, url: uri, tabId: tabId };
+            }
             else {
                 clickObj = {}
             }
@@ -110,7 +120,7 @@ chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
 });
 
 function AddNewUrlToService(name, url) {
-    console.log("check");
+    console.log("Adding " + url +" ["+name+"] to server" );
     chrome.pageAction.hide(clickObj.tabId);
     serviioApi.getOnlineResource(url,
     function (response) {
@@ -145,10 +155,18 @@ function displayOptionToViewSettings() {
 }
 
 function getPlaylistUrl(url) {
-    var regEx = /list=PL([A-Z0-9]+)/;
+    var regEx = /list=PL([A-z0-9]+)/;
     var matches = regEx.exec(url);
-    var playlistId = matches[1];
-    return "http://gdata.youtube.com/feeds/api/playlists/" + playlistId;
+    if (matches) {
+        var playlistId = matches[1];
+        var uri = "http://gdata.youtube.com/feeds/api/playlists/" + playlistId;
+        return uri;
+    }
+    regEx = /list=([A-z0-9]+)/;
+    matches = regEx.exec(url);
+    playlistId = matches[1];
+    uri = "http://gdata.youtube.com/feeds/api/playlists/" + playlistId;
+    return uri;
 };
 
 function getParameterByName(name, url) {

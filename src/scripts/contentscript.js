@@ -5,21 +5,27 @@ var buttonRemoveStyle = generateButton("Remove from serviio", "images/icon.remov
 var buttonRefreshStyle = generateButton("Refresh feed on serviio", "images/icon.refresh.png", "refresh"); 
 
 // look through all edit buttons
-$('.vm-video-item-content').each(function (index) {
-    var name = $(this).find('.vm-video-title-text').text();
-    var playListUri = $(this).find('button').attr("href");
+$('.yt-lockup2-content').each(function (index) {
+    
+    var name = $(this).find('.yt-uix-sessionlink').text();
+    var playListUri = $(this).find('.yt-uix-sessionlink').attr("href");
     var playlistId = extractPlaylistId(playListUri);
-    var currentButtonCollection = $(this).find('.vm-pl-edit');
-    getOnlineResource(getPlaylistUrl(playlistId), function (response) {
+    var playlistUrl = getPlaylistUrl(playlistId);
+    console.log("Found playlist " + name + "  " + playListUri + "  " + playlistUrl + " ");
+    var currentButtonCollection = $(this).find('.yt-lockup2-meta-info, .yt-lockup2-meta').last();
+    getOnlineResource(playlistUrl, function (response) {
         if (!response.isValidResponse) return "";
         //Append the add 
         var addbutton = currentButtonCollection.append(buttonAddStyle).find(".add");
+        var removebutton = currentButtonCollection.append(buttonRemoveStyle).find(".remove");
+        var refbutton = currentButtonCollection.append(buttonRefreshStyle).find(".refresh");
+
         addbutton.click(function () {
             var currentButton = $(this);
             currentButton.hide('slow');
             if (!response.found) {
-                addOnlineResource(name, getPlaylistUrl(playlistId), function (r) {
-                    getOnlineResource(getPlaylistUrl(playlistId), function (getNv) {
+                addOnlineResource(name, playlistUrl, function (r) {
+                    getOnlineResource(playlistUrl, function (getNv) {
                         response = getNv;
                         removebutton.show('slow');
                         refbutton.show('slow');
@@ -28,8 +34,8 @@ $('.vm-video-item-content').each(function (index) {
                 });
             }
         });
+        
         //Append remove button
-        var removebutton = currentButtonCollection.append(buttonRemoveStyle).find(".remove");
         removebutton.click(function () {
             var currentButton = $(this);
             currentButton.hide('slow');
@@ -44,8 +50,6 @@ $('.vm-video-item-content').each(function (index) {
         });
 
         //Append the add refresh button
-        var refbutton = currentButtonCollection.append(buttonRefreshStyle).find(".refresh");
-
         refbutton.click(function () {
             var currentButton = $(this);
             if (response.found) {
@@ -71,7 +75,7 @@ $('.vm-video-item-content').each(function (index) {
 
 function generateButton(name, icon, className) {
     var textWithImage = '<img src="' + chrome.extension.getURL(icon) + '" style="margin-right:5px"/>'
-    var buttonTemplate = '<button type="button"  title="{0}"  style="display:none" class="{1} serviiotubebutton yt-uix-button yt-uix-button-default yt-uix-tooltip" role="button"><span class="yt-uix-button-content">{t}</span></button>'.replace("{t}", textWithImage);
+    var buttonTemplate = '<button type="button"  title="{0}"  style="display:none;float:right" class="{1} serviiotubebutton yt-uix-button yt-uix-button-default yt-uix-tooltip" role="button"><span class="yt-uix-button-content">{t}</span></button>'.replace("{t}", textWithImage);
     return buttonTemplate.replace("{0}", name).replace("{1}", className);
 }
 
@@ -79,7 +83,6 @@ function getOnlineResource(url, func) {
     chrome.extension.sendMessage({ type: "getOnlineResource", url: url }, function (response) {
         console.log("response recieved");
         func(response);
-
     });
 }
 
@@ -104,12 +107,18 @@ function refreshOnlineResource(id, func) {
     });
 }
 
-function extractPlaylistId(playListUri) {
-    var regEx = /list=PL([A-Z0-9]+)/;
-    var matches = regEx.exec(playListUri);
-    var playlistId = matches[1];
+function extractPlaylistId(url) {
+    var regEx = /list=PL([A-z0-9]+)/;
+    var matches = regEx.exec(url);
+    if (matches) {
+        var playlistId = matches[1];
+        return playlistId;
+    }
+    regEx = /list=([A-z0-9]+)/;
+    matches = regEx.exec(url);
+    playlistId = matches[1];
     return playlistId;
-}
+};
 
 function getPlaylistUrl(playlistId) {
     return "http://gdata.youtube.com/feeds/api/playlists/"+playlistId;

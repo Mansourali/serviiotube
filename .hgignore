@@ -7,3 +7,7 @@ obj/
 build/dist
 build/release
 *.pem
+docs/.*
+src/bin/*
+src/images/.*.png
+src/scripts/thirdparty/.*.js
